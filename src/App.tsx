@@ -1,6 +1,6 @@
 function App() {
   return (
-    <h1>Hello React</h1>
+    <h1 className="bg-black" onClick={ () => console.log('clicked') }>Hello React</h1>
   );
 }
 
