@@ -1,121 +1,14 @@
 import { useState } from 'react';
-import ReactJson from 'react-json-view'
-
-const json = {
-  type: 'Template',
-  body: [
-    {
-      type: 'SetStatement',
-      declarations: [
-        {
-          type: 'VariableDeclaration',
-          name: {
-            type: 'Identifier',
-            name: 'greeting',
-          },
-          init: {
-            type: 'StringLiteral',
-            value: 'Hello World',
-          },
-        },
-      ],
-    },
-    {
-      type: 'Text',
-      value: '\n\n',
-    },
-    {
-      type: 'VariableStatement',
-      value: {
-        type: 'FilterExpression',
-        expression: {
-          type: 'Identifier',
-          name: 'greeting',
-        },
-        filter: {
-          type: 'Identifier',
-          name: 'lower',
-        },
-      },
-    },
-    {
-      type: 'Text',
-      value: '\n\n',
-    },
-    {
-      type: 'ForInStatement',
-      body: [
-        {
-          type: 'Text',
-          value: '\n  ',
-        },
-        {
-          type: 'VariableStatement',
-          value: {
-            type: 'Identifier',
-            name: 'i',
-          },
-        },
-        {
-          type: 'Text',
-          value: ',\n',
-        },
-      ],
-      variables: [
-        {
-          type: 'Identifier',
-          name: 'i',
-        },
-      ],
-      expression: {
-        type: 'CallExpression',
-        callee: {
-          type: 'Identifier',
-          name: 'range',
-        },
-        arguments: [
-          {
-            type: 'NamedArgument',
-            key: {
-              type: 'Identifier',
-              name: 'low',
-            },
-            value: {
-              type: 'NumericLiteral',
-              value: 1,
-            },
-          },
-          {
-            type: 'NamedArgument',
-            key: {
-              type: 'Identifier',
-              name: 'high',
-            },
-            value: {
-              type: 'NumericLiteral',
-              value: 10,
-            },
-          },
-          {
-            type: 'NamedArgument',
-            key: {
-              type: 'Identifier',
-              name: 'step',
-            },
-            value: {
-              type: 'NumericLiteral',
-              value: 2,
-            },
-          },
-        ],
-      },
-      alternate: null,
-    },
-  ],
-};
+import ReactJson from 'react-json-view';
+import { parseCode } from '../utils/parse-code';
 
 function Parser() {
-  const [code, setCode] = useState(`hello`);
+  const initJson = parseCode(
+    `2 + 4;`,
+    'https://unpkg.com/tree-sitter-javascript/tree-sitter-javascript.wasm'
+  );
+  const [json, setJson] = useState(initJson);
+  const [code, setCode] = useState(`2 + 4;`);
 
   return (
     <div className="flex-1 flex items-stretch mt-4">
@@ -125,7 +18,7 @@ function Parser() {
         onChange={(e) => setCode(e.currentTarget.value)}
       />
       <div className="flex-1">
-        <ReactJson  src={json} />
+        <ReactJson src={json} />
       </div>
     </div>
   );

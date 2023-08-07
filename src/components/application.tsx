@@ -1,15 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
-
-const parsers = [
-  {
-    id: 'php',
-    name: 'PHP',
-  },
-  {
-    id: 'twig',
-    name: 'Twig',
-  },
-];
+import { parsers } from '../parsers';
 
 function Application() {
   return (
