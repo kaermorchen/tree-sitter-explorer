@@ -45,5 +45,11 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.3.3"
+  },
+  "overrides": {
+    "react-json-view": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
