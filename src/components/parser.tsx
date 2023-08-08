@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import JsonView from '@uiw/react-json-view';
+import JsonView from 'react18-json-view'
+import 'react18-json-view/src/style.css'
 import { parseCode } from '../utils/parse-code';
 import { IParser } from '../parsers';
 import { useLoaderData } from 'react-router-dom';
@@ -30,7 +31,7 @@ function Parser() {
         onChange={(e) => setCode(e.currentTarget.value)}
       />
       <div className="flex-1">
-        <JsonView value={json} />
+        <JsonView src={json} />
       </div>
     </div>
   );
