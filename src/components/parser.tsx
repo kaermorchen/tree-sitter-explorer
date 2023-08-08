@@ -13,9 +13,14 @@ function Parser() {
   const { parser } = useLoaderData() as {
     parser: IParser;
   };
+
   // const [json, setJson] = useState<undefined | object>();
   const [code, setCode] = useState(parser.initCode);
   const [cst, setCst] = useState<undefined | SyntaxNode>();
+
+  useEffect(() => {
+    setCode(parser.initCode);
+  }, [parser.initCode]);
 
   useEffect(() => {
     async function codeToCst(code: string) {
