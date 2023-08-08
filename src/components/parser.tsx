@@ -1,14 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import JsonView from '@uiw/react-json-view';
 import { parseCode } from '../utils/parse-code';
+import { IParser } from '../parsers';
+import { useLoaderData } from 'react-router-dom';
+import { SyntaxNode } from 'web-tree-sitter';
 
 function Parser() {
-  const initJson = parseCode(
-    `2 + 4;`,
-    'https://unpkg.com/tree-sitter-javascript/tree-sitter-javascript.wasm'
-  );
-  const [json, setJson] = useState(initJson);
-  const [code, setCode] = useState(`2 + 4;`);
+  const { parser } = useLoaderData() as {
+    parser: IParser;
+  };
+  const [json, setJson] = useState<undefined | SyntaxNode>();
+  const [code, setCode] = useState(parser.initCode);
+
+  useEffect(() => {
+    async function codeToCst(code: string) {
+      const cst = await parseCode(code, parser.wasmUrl);
+
+      setJson(cst.rootNode);
+    }
+
+    codeToCst(code);
+  }, [code, parser.wasmUrl]);
 
   return (
     <div className="flex-1 flex items-stretch mt-4">
