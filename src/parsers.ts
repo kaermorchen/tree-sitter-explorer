@@ -13,4 +13,10 @@ export const parsers: IParser[] = [
       'https://unpkg.com/tree-sitter-javascript/tree-sitter-javascript.wasm',
     initCode: ['2 + 4;'].join('\n'),
   },
+  {
+    id: 'twig',
+    name: 'Twig',
+    wasmUrl: 'https://unpkg.com/tree-sitter-twig/tree-sitter-twig.wasm',
+    initCode: ['{{ var }}'].join('\n'),
+  },
 ];
