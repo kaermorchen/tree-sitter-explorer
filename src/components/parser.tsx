@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import JsonView from 'react18-json-view';
-import 'react18-json-view/src/style.css';
+// import JsonView from 'react18-json-view';
+// import 'react18-json-view/src/style.css';
 import { parseCode } from '../utils/parse-code';
 import { IParser } from '../parsers';
 import { useLoaderData } from 'react-router-dom';
-import { cstToJson } from '../utils/cst-to-json';
+// import { cstToJson } from '../utils/cst-to-json';
 import TreeView from './tree-view';
 import { SyntaxNode } from 'web-tree-sitter';
 
@@ -12,7 +12,7 @@ function Parser() {
   const { parser } = useLoaderData() as {
     parser: IParser;
   };
-  const [json, setJson] = useState<undefined | object>();
+  // const [json, setJson] = useState<undefined | object>();
   const [code, setCode] = useState(parser.initCode);
   const [cst, setCst] = useState<undefined | SyntaxNode>();
 
@@ -26,9 +26,9 @@ function Parser() {
     codeToCst(code);
   }, [code, parser.wasmUrl]);
 
-  useEffect(() => {
-    setJson(cst ? cstToJson(cst) : undefined);
-  }, [cst]);
+  // useEffect(() => {
+  //   setJson(cst ? cstToJson(cst) : undefined);
+  // }, [cst]);
 
   return (
     <div className="flex-1 flex items-stretch mt-4">
