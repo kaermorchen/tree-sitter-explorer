@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ReactJson from 'react-json-view';
+import JsonView from '@uiw/react-json-view';
 import { parseCode } from '../utils/parse-code';
 
 function Parser() {
@@ -18,7 +18,7 @@ function Parser() {
         onChange={(e) => setCode(e.currentTarget.value)}
       />
       <div className="flex-1">
-        <ReactJson src={json} />
+        <JsonView value={json} />
       </div>
     </div>
   );
