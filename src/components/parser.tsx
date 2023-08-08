@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
-import JsonView from 'react18-json-view'
-import 'react18-json-view/src/style.css'
+import JsonView from 'react18-json-view';
+import 'react18-json-view/src/style.css';
 import { parseCode } from '../utils/parse-code';
 import { IParser } from '../parsers';
 import { useLoaderData } from 'react-router-dom';
-import { SyntaxNode } from 'web-tree-sitter';
+import { cstToJson } from '../utils/cst-to-json';
 
 function Parser() {
   const { parser } = useLoaderData() as {
     parser: IParser;
   };
-  const [json, setJson] = useState<undefined | SyntaxNode>();
+  const [json, setJson] = useState<undefined | object>();
   const [code, setCode] = useState(parser.initCode);
 
   useEffect(() => {
     async function codeToCst(code: string) {
       const cst = await parseCode(code, parser.wasmUrl);
 
-      setJson(cst.rootNode);
+      setJson(cstToJson(cst.rootNode));
     }
 
     codeToCst(code);
@@ -31,7 +31,7 @@ function Parser() {
         onChange={(e) => setCode(e.currentTarget.value)}
       />
       <div className="flex-1">
-        <JsonView src={json} />
+        {json ? <JsonView src={json} enableClipboard={false} /> : ''}
       </div>
     </div>
   );
