@@ -29,12 +29,12 @@ function Parser() {
   }, [code, parser.wasmUrl]);
 
   return (
-    <div className="flex-1 flex items-stretch mt-4">
-      <div className="flex-1 p-4 border-r-2">
+    <div className="flex-1 flex items-stretch my-4">
+      <div className="flex-1 px-4 border-r-2">
         <CodeMirror value={code} onChange={setCode} />
       </div>
 
-      <div className="flex-1 p-4">{cst ? <TreeView node={cst} /> : ''}</div>
+      <div className="flex-1 px-4">{cst ? <TreeView node={cst} /> : ''}</div>
     </div>
   );
 }
