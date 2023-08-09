@@ -9,19 +9,20 @@ import Application from './components/application';
 import Parser from './components/parser';
 import { parsers } from './parsers';
 
+const defaultRoute = 'parser/tree-sitter-javascript';
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <>
         <Application />
-        <Navigate to="parser/tree-sitter-javascript" />
+        <Navigate to={defaultRoute} />
       </>
     ),
     children: [
       {
         path: 'parser',
-        element: <Navigate to="/parser/tree-sitter-javascript" />,
+        element: <Navigate to={defaultRoute} />,
       },
       {
         path: 'parser/:parserId',
