@@ -1,5 +1,9 @@
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from 'react-router-dom';
 import './index.css';
 import Application from './components/application';
 import Parser from './components/parser';
@@ -8,8 +12,17 @@ import { parsers } from './parsers';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Application />,
+    element: (
+      <>
+        <Application />
+        <Navigate to="parser/tree-sitter-javascript" />
+      </>
+    ),
     children: [
+      {
+        path: 'parser',
+        element: <Navigate to="/parser/tree-sitter-javascript" />,
+      },
       {
         path: 'parser/:parserId',
         element: <Parser />,

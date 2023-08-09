@@ -28,10 +28,6 @@ function Parser() {
     codeToCst(code);
   }, [code, parser.wasmUrl]);
 
-  // useEffect(() => {
-  //   console.log('EditorView:', refs.current?.view);
-  // }, [refs.current.view]);
-
   function treeNodeOnClickHandler(startIndex: number, endIndex: number): void {
     refs.current?.view?.dispatch({
       selection: { anchor: startIndex, head: endIndex },
