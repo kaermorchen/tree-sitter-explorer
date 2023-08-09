@@ -16,6 +16,9 @@
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
     "react18-json-view": "^0.1.0",
+    "tree-sitter-javascript": "0.19.0",
+    "tree-sitter-php": "0.19.0",
+    "tree-sitter-scala": "0.19.0",
     "typescript": "^4.9.5",
     "web-tree-sitter": "^0.20.8",
     "web-vitals": "^2.1.4"
@@ -24,7 +27,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-wasm:javascript": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-javascript",
+    "build-wasm:php": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-php",
+    "build-wasm:scala": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-scala"
   },
   "eslintConfig": {
     "extends": [
