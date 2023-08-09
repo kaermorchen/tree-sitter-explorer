@@ -3,20 +3,25 @@ import { SyntaxNode } from 'web-tree-sitter';
 
 interface TreeNodeProps {
   node: SyntaxNode;
+  onClick: (startIndex: number, endIndex: number) => void;
 }
 
-function TreeNode({ node }: TreeNodeProps) {
+function TreeNode({ node, onClick }: TreeNodeProps) {
   return (
     <div className="json-view--pair">
-      {node.isNamed() ? (
-        <span className="json-view--property">{node.type}</span>
-      ) : (
-        <span className="json-view--string">"{node.text}"</span>
-      )}
+      <span
+        className={`json-view--${
+          node.isNamed() ? 'property' : 'string'
+        } cursor-pointer`}
+        onClick={() => onClick(node.startIndex, node.endIndex)}
+      >
+        {node.isNamed() ? node.type : `"${node.text}"`}
+      </span>
+
       {node.children.length > 0 && (
         <div className="jv-indent">
           {node.children.map((node) => (
-            <TreeNode node={node} key={node.id} />
+            <TreeNode node={node} key={node.id} onClick={onClick} />
           ))}
         </div>
       )}

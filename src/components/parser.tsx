@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { parseCode } from '../utils/parse-code';
 import { IParser } from '../parsers';
 import { useLoaderData } from 'react-router-dom';
 import TreeView from './tree-view';
 import { SyntaxNode } from 'web-tree-sitter';
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 
 function Parser() {
   const { parser } = useLoaderData() as {
     parser: IParser;
   };
-
+  const refs = useRef<ReactCodeMirrorRef>({});
   const [code, setCode] = useState(parser.initCode);
   const [cst, setCst] = useState<undefined | SyntaxNode>();
 
@@ -28,13 +28,25 @@ function Parser() {
     codeToCst(code);
   }, [code, parser.wasmUrl]);
 
+  // useEffect(() => {
+  //   console.log('EditorView:', refs.current?.view);
+  // }, [refs.current.view]);
+
+  function treeNodeOnClickHandler(startIndex: number, endIndex: number): void {
+    refs.current?.view?.dispatch({
+      selection: { anchor: startIndex, head: endIndex },
+    });
+  }
+
   return (
     <div className="flex-1 flex items-stretch my-4">
       <div className="flex-1 px-4 border-r-2">
-        <CodeMirror value={code} onChange={setCode} />
+        <CodeMirror value={code} onChange={setCode} ref={refs} />
       </div>
 
-      <div className="flex-1 px-4">{cst ? <TreeView node={cst} /> : ''}</div>
+      <div className="flex-1 px-4">
+        {cst ? <TreeView node={cst} onClick={treeNodeOnClickHandler} /> : ''}
+      </div>
     </div>
   );
 }
