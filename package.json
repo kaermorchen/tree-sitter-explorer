@@ -28,6 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "build-wasm": "concurrently npm:build-wasm:* --max-processes=1",
     "build-wasm:javascript": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-javascript",
     "build-wasm:php": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-php",
     "build-wasm:scala": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-scala"
@@ -51,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "tailwindcss": "^3.3.3"
   }
 }
