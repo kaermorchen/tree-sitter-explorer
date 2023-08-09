@@ -1,9 +1,17 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { parsers } from '../parsers';
+import { defaultRoute } from '..';
+import { useEffect } from 'react';
 
 function Application() {
   const navigate = useNavigate();
   const params = useParams();
+
+  useEffect(() => {
+    if (params.parserId === undefined) {
+      navigate(defaultRoute);
+    }
+  }, [navigate, params.parserId]);
 
   return (
     <div className="flex flex-col h-screen">

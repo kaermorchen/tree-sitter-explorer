@@ -9,16 +9,12 @@ import Application from './components/application';
 import Parser from './components/parser';
 import { parsers } from './parsers';
 
-const defaultRoute = 'parser/tree-sitter-javascript';
+export const defaultRoute = 'parser/tree-sitter-javascript';
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <>
-        <Application />
-        <Navigate to={defaultRoute} />
-      </>
-    ),
+    element: <Application />,
     children: [
       {
         path: 'parser',
