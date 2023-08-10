@@ -7,9 +7,13 @@ import {
 import './index.css';
 import Application from './components/application';
 import Parser from './components/parser';
-import { parsers } from './parsers';
+import { IParser, parsers } from './parsers';
 
 export const defaultRoute = 'parser/tree-sitter-javascript';
+
+export function getParserById(id: string | undefined): IParser | undefined {
+  return parsers.find((item) => item.id === id);
+}
 
 const router = createBrowserRouter(
   [
@@ -24,8 +28,8 @@ const router = createBrowserRouter(
         {
           path: 'parser/:parserId',
           element: <Parser />,
-          loader: async ({ params }) => {
-            const parser = parsers.find((item) => item.id === params.parserId);
+          loader: ({ params }) => {
+            const parser = getParserById(params.parserId);
 
             return { parser };
           },
