@@ -87,6 +87,19 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-cpp',
   },
   {
+    id: 'tree-sitter-css',
+    name: 'CSS',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-css.wasm`,
+    version: packageJson.dependencies['tree-sitter-css'],
+    initCode: [
+      `p.center {`,
+      `  text-align: center;`,
+      `  color: red;`,
+      `}`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-css',
+  },
+  {
     id: 'tree-sitter-javascript',
     name: 'JavaScript',
     wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-javascript.wasm`,
