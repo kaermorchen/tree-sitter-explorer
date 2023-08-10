@@ -29,9 +29,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build-wasm": "concurrently npm:build-wasm:* --max-processes=1",
-    "build-wasm:javascript": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-javascript",
-    "build-wasm:php": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-php",
-    "build-wasm:scala": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm ../../node_modules/tree-sitter-scala"
+    "build-wasm:javascript": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-javascript",
+    "build-wasm:php": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-php",
+    "build-wasm:scala": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-scala",
+    "build-wasm-boilerplate": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm"
   },
   "eslintConfig": {
     "extends": [
