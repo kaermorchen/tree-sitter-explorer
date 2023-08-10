@@ -59,6 +59,7 @@
     "build-wasm:php": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-php",
     "build-wasm:python": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-python",
     "build-wasm:regex": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-regex",
+    "build-wasm:ruby": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-ruby",
     "build-wasm:scala": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-scala",
     "build-wasm-boilerplate": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm"
   },
