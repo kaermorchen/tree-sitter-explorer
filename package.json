@@ -50,6 +50,7 @@
     "eject": "react-scripts eject",
     "build-wasm": "concurrently npm:build-wasm:* --max-processes=1",
     "build-wasm:bash": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-bash",
+    "build-wasm:c": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-c",
     "build-wasm:javascript": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-javascript",
     "build-wasm:php": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-php",
     "build-wasm:scala": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-scala",
