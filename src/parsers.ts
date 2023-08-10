@@ -318,4 +318,19 @@ export const parsers: IParser[] = [
     ].join('\n'),
     homepage: 'https://github.com/tree-sitter/tree-sitter-scala',
   },
+  {
+    id: 'tree-sitter-typescript',
+    name: 'typescript',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-typescript.wasm`,
+    version: packageJson.dependencies['tree-sitter-typescript'],
+    initCode: [
+      `type StringOrNumber = string | number;`,
+      ``,
+      `interface ErrorHandling {`,
+      `  success: boolean;`,
+      `  error?: { message: string };`,
+      `}`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-typescript',
+  },
 ];
