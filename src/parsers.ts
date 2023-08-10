@@ -286,6 +286,22 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-ruby',
   },
   {
+    id: 'tree-sitter-rust',
+    name: 'rust',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-rust.wasm`,
+    version: packageJson.dependencies['tree-sitter-rust'],
+    initCode: [
+      `// This is the main function.`,
+      `fn main() {`,
+      `    // Statements here are executed when the compiled binary is called.`,
+      ``,
+      `    // Print text to the console.`,
+      `    println!("Hello World!");`,
+      `}`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-rust',
+  },
+  {
     id: 'tree-sitter-scala',
     name: 'Scala',
     wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-scala.wasm`,
