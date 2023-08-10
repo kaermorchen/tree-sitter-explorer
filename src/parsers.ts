@@ -11,6 +11,22 @@ export interface IParser {
 
 export const parsers: IParser[] = [
   {
+    id: 'tree-sitter-bash',
+    name: 'Bash',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-bash.wasm`,
+    version: packageJson.dependencies['tree-sitter-bash'],
+    initCode: [
+      `#!/bin/bash`,
+      `: '`,
+      `The following script calculates`,
+      `the square value of the number, 5.`,
+      `'`,
+      `((area=5*5))`,
+      `echo $area`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-bash',
+  },
+  {
     id: 'tree-sitter-javascript',
     name: 'JavaScript',
     wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-javascript.wasm`,
