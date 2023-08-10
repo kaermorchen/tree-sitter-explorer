@@ -100,6 +100,22 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-css',
   },
   {
+    id: 'tree-sitter-go',
+    name: 'Go',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-go.wasm`,
+    version: packageJson.dependencies['tree-sitter-go'],
+    initCode: [
+      `package main`,
+      ``,
+      `import "fmt"`,
+      ``,
+      `func main() {`,
+      `    fmt.Println("hello world")`,
+      `}`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-go',
+  },
+  {
     id: 'tree-sitter-javascript',
     name: 'JavaScript',
     wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-javascript.wasm`,
