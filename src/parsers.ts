@@ -6,6 +6,7 @@ export interface IParser {
   wasmUrl: string;
   initCode: string;
   version: string;
+  homepage: string;
 }
 
 export const parsers: IParser[] = [
@@ -26,6 +27,7 @@ export const parsers: IParser[] = [
       '',
       'sum(num1, num2);',
     ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-javascript',
   },
   {
     id: 'tree-sitter-twig',
@@ -42,6 +44,7 @@ export const parsers: IParser[] = [
       '<h1>My Webpage</h1>',
       '{{ a_variable }}',
     ].join('\n'),
+    homepage: 'https://github.com/kaermorchen/tree-sitter-twig',
   },
   {
     id: 'tree-sitter-php',
@@ -62,6 +65,7 @@ export const parsers: IParser[] = [
       '// show object properties',
       'echo $Lightning->model;',
     ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-php',
   },
   {
     id: 'tree-sitter-scala',
@@ -78,5 +82,6 @@ export const parsers: IParser[] = [
       'for (count, fruits) <- countsToFruits do',
       '  println(s"with \'a\' × $count = $fruits")',
     ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-scala',
   },
 ];
