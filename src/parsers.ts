@@ -12,7 +12,7 @@ export const parsers: IParser[] = [
   {
     id: 'tree-sitter-javascript',
     name: 'JavaScript',
-    wasmUrl: '/parsers/tree-sitter-javascript.wasm',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-javascript.wasm`,
     version: packageJson.dependencies['tree-sitter-javascript'],
     initCode: ['2 + 4;'].join('\n'),
   },
@@ -26,14 +26,14 @@ export const parsers: IParser[] = [
   {
     id: 'tree-sitter-php',
     name: 'PHP',
-    wasmUrl: '/parsers/tree-sitter-php.wasm',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-php.wasm`,
     version: packageJson.dependencies['tree-sitter-php'],
     initCode: ['hello'].join('\n'),
   },
   {
     id: 'tree-sitter-scala',
     name: 'Scala',
-    wasmUrl: '/parsers/tree-sitter-scala.wasm',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-scala.wasm`,
     version: packageJson.dependencies['tree-sitter-scala'],
     initCode: ['hello'].join('\n'),
   },
