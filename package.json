@@ -56,6 +56,7 @@
     "build-wasm:java": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-java",
     "build-wasm:javascript": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-javascript",
     "build-wasm:json": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-json",
+    "build-wasm:julia": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-julia",
     "build-wasm:php": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-php",
     "build-wasm:scala": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-scala",
     "build-wasm-boilerplate": "cd public/parsers && npx tree-sitter-cli@0.20.7 build-wasm"

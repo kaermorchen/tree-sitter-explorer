@@ -187,6 +187,22 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-json',
   },
   {
+    id: 'tree-sitter-julia',
+    name: 'julia',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-julia.wasm`,
+    version: packageJson.dependencies['tree-sitter-julia'],
+    initCode: [
+      `function mandelbrot(a)`,
+      `    z = 0`,
+      `    for i=1:50`,
+      `        z = z^2 + a`,
+      `    end`,
+      `    return z`,
+      `end`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-julia',
+  },
+  {
     id: 'tree-sitter-twig',
     name: 'Twig',
     wasmUrl: 'https://unpkg.com/tree-sitter-twig@0.4.0/tree-sitter-twig.wasm',
