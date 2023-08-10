@@ -260,6 +260,16 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-python',
   },
   {
+    id: 'tree-sitter-regex',
+    name: 'regex',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-regex.wasm`,
+    version: packageJson.dependencies['tree-sitter-regex'],
+    initCode: [
+      `/((\\d{3})(?:\\.|-))?(\\d{3})(?:\\.|-)(\\d{4})/`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-regex',
+  },
+  {
     id: 'tree-sitter-scala',
     name: 'Scala',
     wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-scala.wasm`,
