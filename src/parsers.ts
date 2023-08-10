@@ -173,6 +173,20 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-javascript',
   },
   {
+    id: 'tree-sitter-json',
+    name: 'json',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-json.wasm`,
+    version: packageJson.dependencies['tree-sitter-json'],
+    initCode: [
+      `{`,
+      `  "name":"John",`,
+      `  "age":30,`,
+      `  "car":null`,
+      `}`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-json',
+  },
+  {
     id: 'tree-sitter-twig',
     name: 'Twig',
     wasmUrl: 'https://unpkg.com/tree-sitter-twig@0.4.0/tree-sitter-twig.wasm',
