@@ -52,6 +52,7 @@
     "build-wasm:bash": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-bash",
     "build-wasm:c": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-c",
     "build-wasm:c-sharp": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-c-sharp",
+    "build-wasm:cpp": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-cpp",
     "build-wasm:javascript": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-javascript",
     "build-wasm:php": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-php",
     "build-wasm:scala": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-scala",

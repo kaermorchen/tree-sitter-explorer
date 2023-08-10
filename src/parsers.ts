@@ -71,6 +71,22 @@ export const parsers: IParser[] = [
     homepage: 'https://github.com/tree-sitter/tree-sitter-c-sharp',
   },
   {
+    id: 'tree-sitter-cpp',
+    name: 'C++',
+    wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-cpp.wasm`,
+    version: packageJson.dependencies['tree-sitter-cpp'],
+    initCode: [
+      `// Your First C++ Program`,
+      ``,
+      `#include <iostream>`,
+      `int main() {`,
+      `    std::cout << "Hello World!";`,
+      `    return 0;`,
+      `}`,
+    ].join('\n'),
+    homepage: 'https://github.com/tree-sitter/tree-sitter-cpp',
+  },
+  {
     id: 'tree-sitter-javascript',
     name: 'JavaScript',
     wasmUrl: `/tree-sitter-explorer/parsers/tree-sitter-javascript.wasm`,
