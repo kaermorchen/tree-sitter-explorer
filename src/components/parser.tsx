@@ -36,11 +36,11 @@ function Parser() {
 
   return (
     <div className="flex-1 flex items-stretch my-4">
-      <div className="flex-1 px-4 border-r-2">
+      <div className="flex-1 px-4 border-r-2 overflow-auto content-container">
         <CodeMirror value={code} onChange={setCode} ref={refs} />
       </div>
 
-      <div className="flex-1 px-4">
+      <div className="flex-1 px-4 overflow-auto content-container">
         {cst ? <TreeView node={cst} onClick={treeNodeOnClickHandler} /> : ''}
       </div>
     </div>

@@ -24,7 +24,7 @@ function Application() {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="flex-none flex items-center px-3 py-4 sm:px-4 lg:px-6 shadow">
+      <header className="flex-none h-16 flex items-center px-3 sm:px-4 lg:px-6 shadow">
         <h1 className="flex-none text-xl font-bold">
           <a href="/tree-sitter-explorer">Tree-sitter explorer</a>
         </h1>

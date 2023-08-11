@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.content-container {
+  height: calc(
+    100vh - theme('spacing.16') - theme('spacing.4') - theme('spacing.4')
+  );
+}
