@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-explorer",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "author": "Stanislav Romanov <kaermorchen@gmail.com>",
   "repository": "https://github.com/kaermorchen/tree-sitter-explorer",
   "license": "Mozilla Public License 2.0",
