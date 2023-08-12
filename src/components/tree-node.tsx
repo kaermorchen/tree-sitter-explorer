@@ -5,11 +5,24 @@ import ConsoleLineIcon from 'mdi-react/ConsoleLineIcon';
 
 interface TreeNodeProps {
   node: SyntaxNode;
+  fieldName: string | undefined;
   onClick: (startIndex: number, endIndex: number) => void;
 }
 
-function TreeNode({ node, onClick }: TreeNodeProps) {
+function TreeNode({ node, fieldName, onClick }: TreeNodeProps) {
   const [childrenIsShown, setChildrenIsShown] = useState<boolean>(true);
+
+  const cursor = node.walk();
+  const children: Pick<TreeNodeProps, 'node' | 'fieldName'>[] = [];
+
+  if (cursor.gotoFirstChild()) {
+    do {
+      children.push({
+        fieldName: cursor.currentFieldName(),
+        node: cursor.currentNode(),
+      });
+    } while (cursor.gotoNextSibling());
+  }
 
   return (
     <div className="json-view--pair">
@@ -20,10 +33,13 @@ function TreeNode({ node, onClick }: TreeNodeProps) {
           } cursor-pointer`}
           onClick={() => onClick(node.startIndex, node.endIndex)}
         >
+          <span className="json-view--index">
+            {fieldName ? `${fieldName}: ` : ''}
+          </span>
           {node.isNamed() ? node.type : `"${node.text}"`}
         </span>
 
-        {node.children.length > 0 && (
+        {children.length > 0 && (
           <span
             className="cursor-pointer ml-1 text-sm select-none"
             onClick={() => setChildrenIsShown(!childrenIsShown)}
@@ -39,10 +55,15 @@ function TreeNode({ node, onClick }: TreeNodeProps) {
         />
       </div>
 
-      {node.children.length > 0 && childrenIsShown && (
+      {children.length > 0 && childrenIsShown && (
         <div className="jv-indent">
-          {node.children.map((node) => (
-            <TreeNode node={node} key={node.id} onClick={onClick} />
+          {children.map(({ node, fieldName }) => (
+            <TreeNode
+              node={node}
+              key={node.id}
+              fieldName={fieldName}
+              onClick={onClick}
+            />
           ))}
         </div>
       )}

@@ -10,7 +10,7 @@ interface TreeViewProps {
 function TreeView({ node, onClick }: TreeViewProps) {
   return (
     <code className="json-view">
-      <TreeNode node={node} onClick={onClick} />
+      <TreeNode node={node} onClick={onClick} fieldName={undefined} />
     </code>
   );
 }
