@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import 'react18-json-view/src/style.css';
 import { SyntaxNode } from 'web-tree-sitter';
 
@@ -7,6 +8,8 @@ interface TreeNodeProps {
 }
 
 function TreeNode({ node, onClick }: TreeNodeProps) {
+  const [childrenIsShown, setChildrenIsShown] = useState<boolean>(true);
+
   return (
     <div className="json-view--pair">
       <span
@@ -19,6 +22,12 @@ function TreeNode({ node, onClick }: TreeNodeProps) {
       </span>
 
       {node.children.length > 0 && (
+        <span className='cursor-pointer ml-1 text-sm select-none' onClick={() => setChildrenIsShown(!childrenIsShown)}>
+          [{childrenIsShown ? '-' : '+'}]
+        </span>
+      )}
+
+      {node.children.length > 0 && childrenIsShown && (
         <div className="jv-indent">
           {node.children.map((node) => (
             <TreeNode node={node} key={node.id} onClick={onClick} />
