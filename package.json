@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.2.7",
     "@uiw/react-codemirror": "^4.21.9",
     "mdi-react": "^9.2.0",
+    "mobx": "^6.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
