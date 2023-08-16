@@ -4,7 +4,7 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-import './index.css';
+import './style.css';
 import Application from './components/application';
 import Parser from './components/parser';
 import { IParser, parsers } from './parsers';
