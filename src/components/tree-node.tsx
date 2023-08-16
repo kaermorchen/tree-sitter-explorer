@@ -13,7 +13,7 @@ interface TreeNodeProps {
 
 class TreeNodeState {
   childrenIsShown = true;
-  node;
+  node: TreeNodeProps['node'];
 
   constructor(node: TreeNodeProps['node']) {
     makeObservable(this, {
