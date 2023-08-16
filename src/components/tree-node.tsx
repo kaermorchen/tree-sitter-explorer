@@ -1,7 +1,9 @@
-import { useState } from 'react';
 import 'react18-json-view/src/style.css';
 import { SyntaxNode } from 'web-tree-sitter';
 import ConsoleLineIcon from 'mdi-react/ConsoleLineIcon';
+import { action, computed, makeObservable, observable } from 'mobx';
+import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
 
 interface TreeNodeProps {
   node: SyntaxNode;
@@ -9,20 +11,43 @@ interface TreeNodeProps {
   onClick: (startIndex: number, endIndex: number) => void;
 }
 
-function TreeNode({ node, fieldName, onClick }: TreeNodeProps) {
-  const [childrenIsShown, setChildrenIsShown] = useState<boolean>(true);
+class TreeNodeState {
+  childrenIsShown = true;
+  node;
 
-  const cursor = node.walk();
-  const children: Pick<TreeNodeProps, 'node' | 'fieldName'>[] = [];
+  constructor(node: TreeNodeProps['node']) {
+    makeObservable(this, {
+      childrenIsShown: observable,
+      children: computed,
+      toggleChildrenIsShown: action,
+    });
 
-  if (cursor.gotoFirstChild()) {
-    do {
-      children.push({
-        fieldName: cursor.currentFieldName(),
-        node: cursor.currentNode(),
-      });
-    } while (cursor.gotoNextSibling());
+    this.node = node;
   }
+
+  toggleChildrenIsShown = () => {
+    this.childrenIsShown = !this.childrenIsShown;
+  };
+
+  get children() {
+    const cursor = this.node.walk();
+    const children: Pick<TreeNodeProps, 'node' | 'fieldName'>[] = [];
+
+    if (cursor.gotoFirstChild()) {
+      do {
+        children.push({
+          fieldName: cursor.currentFieldName(),
+          node: cursor.currentNode(),
+        });
+      } while (cursor.gotoNextSibling());
+    }
+
+    return children;
+  }
+}
+
+const TreeNode = observer(({ node, fieldName, onClick }: TreeNodeProps) => {
+  const [state] = useState(() => new TreeNodeState(node));
 
   return (
     <div className="json-view--pair">
@@ -39,12 +64,12 @@ function TreeNode({ node, fieldName, onClick }: TreeNodeProps) {
           {node.isNamed() ? node.type : `"${node.text}"`}
         </span>
 
-        {children.length > 0 && (
+        {state.children.length > 0 && (
           <span
             className="cursor-pointer ml-1 text-sm select-none"
-            onClick={() => setChildrenIsShown(!childrenIsShown)}
+            onClick={state.toggleChildrenIsShown}
           >
-            [{childrenIsShown ? '-' : '+'}]
+            [{state.childrenIsShown ? '-' : '+'}]
           </span>
         )}
 
@@ -55,9 +80,9 @@ function TreeNode({ node, fieldName, onClick }: TreeNodeProps) {
         />
       </div>
 
-      {children.length > 0 && childrenIsShown && (
+      {state.children.length > 0 && state.childrenIsShown && (
         <div className="jv-indent">
-          {children.map(({ node, fieldName }) => (
+          {state.children.map(({ node, fieldName }) => (
             <TreeNode
               node={node}
               key={node.id}
@@ -69,6 +94,6 @@ function TreeNode({ node, fieldName, onClick }: TreeNodeProps) {
       )}
     </div>
   );
-}
+});
 
 export default TreeNode;
