@@ -8,6 +8,7 @@ import './style.css';
 import Application from './components/application';
 import Parser from './components/parser';
 import { IParser, parsers } from './parsers';
+import { observer } from 'mobx-react';
 
 export const defaultRoute = 'parser/tree-sitter-javascript';
 
@@ -42,6 +43,8 @@ const router = createBrowserRouter(
   }
 );
 
+const Main = observer(() => <RouterProvider router={router} />);
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <RouterProvider router={router} />
+  <Main />
 );
