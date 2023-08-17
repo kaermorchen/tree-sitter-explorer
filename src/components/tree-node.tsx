@@ -1,9 +1,9 @@
 import 'react18-json-view/src/style.css';
 import { SyntaxNode } from 'web-tree-sitter';
 import ConsoleLineIcon from 'mdi-react/ConsoleLineIcon';
-import { action, computed, makeObservable, observable } from 'mobx';
-import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { action, makeObservable, observable } from 'mobx';
+import { observer } from 'mobx-react';
+import { Component } from 'react';
 
 interface TreeNodeProps {
   node: SyntaxNode;
@@ -11,26 +11,18 @@ interface TreeNodeProps {
   onClick: (startIndex: number, endIndex: number) => void;
 }
 
-class TreeNodeState {
+@observer
+export default class TreeNode extends Component<TreeNodeProps> {
+  @observable
   childrenIsShown = true;
-  node: TreeNodeProps['node'];
 
-  constructor(node: TreeNodeProps['node']) {
-    makeObservable(this, {
-      childrenIsShown: observable,
-      children: computed,
-      toggleChildrenIsShown: action,
-    });
-
-    this.node = node;
+  constructor(props: TreeNodeProps) {
+    super(props);
+    makeObservable(this);
   }
 
-  toggleChildrenIsShown = () => {
-    this.childrenIsShown = !this.childrenIsShown;
-  };
-
-  get children() {
-    const cursor = this.node.walk();
+  get childrenNodes() {
+    const cursor = this.props.node.walk();
     const children: Pick<TreeNodeProps, 'node' | 'fieldName'>[] = [];
 
     if (cursor.gotoFirstChild()) {
@@ -44,56 +36,81 @@ class TreeNodeState {
 
     return children;
   }
-}
 
-const TreeNode = observer(({ node, fieldName, onClick }: TreeNodeProps) => {
-  const [state] = useState(() => new TreeNodeState(node));
+  get isNamed() {
+    return this.props.node.isNamed();
+  }
 
-  return (
-    <div className="json-view--pair">
-      <div className="flex items-center group">
-        <span
-          className={`json-view--${
-            node.isNamed() ? 'property' : 'string'
-          } cursor-pointer`}
-          onClick={() => onClick(node.startIndex, node.endIndex)}
-        >
-          <span className="json-view--index">
-            {fieldName ? `${fieldName}: ` : ''}
-          </span>
-          {node.isNamed() ? node.type : `"${node.text}"`}
-        </span>
+  get viewClass() {
+    return `json-view--${this.props.node.isNamed() ? 'property' : 'string'}`;
+  }
 
-        {state.children.length > 0 && (
+  get nodeNameElement(): JSX.Element | undefined {
+    if (typeof this.props.fieldName === 'string') {
+      return <span className="json-view--index">{this.props.fieldName}: </span>;
+    } else {
+      return undefined;
+    }
+  }
+
+  get nodeType(): string {
+    return this.isNamed ? this.props.node.type : `"${this.props.node.text}"`;
+  }
+
+  @action
+  toggleChildrenIsShown = () => {
+    this.childrenIsShown = !this.childrenIsShown;
+  };
+
+  handleClick = () => {
+    this.props.onClick(this.props.node.startIndex, this.props.node.endIndex);
+  };
+
+  logNode = () => {
+    console.log(this.props.node);
+  };
+
+  render() {
+    return (
+      <div className="json-view--pair">
+        <div className="flex items-center group">
           <span
-            className="cursor-pointer ml-1 text-sm select-none"
-            onClick={state.toggleChildrenIsShown}
+            className={`${this.viewClass} cursor-pointer`}
+            onClick={this.handleClick}
           >
-            [{state.childrenIsShown ? '-' : '+'}]
+            {this.nodeNameElement}
+            {this.nodeType}
           </span>
-        )}
 
-        <ConsoleLineIcon
-          className="cursor-pointer ml-1 hidden group-hover:inline-block"
-          onClick={() => console.log(node)}
-          size={16}
-        />
-      </div>
+          {this.childrenNodes.length > 0 && (
+            <span
+              className="cursor-pointer ml-1 text-sm select-none"
+              onClick={this.toggleChildrenIsShown}
+            >
+              [{this.childrenIsShown ? '-' : '+'}]
+            </span>
+          )}
 
-      {state.children.length > 0 && state.childrenIsShown && (
-        <div className="jv-indent">
-          {state.children.map(({ node, fieldName }) => (
-            <TreeNode
-              node={node}
-              key={node.id}
-              fieldName={fieldName}
-              onClick={onClick}
-            />
-          ))}
+          <ConsoleLineIcon
+            className="cursor-pointer ml-1 hidden group-hover:inline-block"
+            onClick={this.logNode}
+            size={16}
+          />
         </div>
-      )}
-    </div>
-  );
-});
 
-export default TreeNode;
+        {this.childrenNodes.length > 0 && this.childrenIsShown && (
+          <div className="jv-indent">
+            {this.childrenNodes.map(({ node, fieldName }) => (
+              <TreeNode
+                node={node}
+                key={node.id}
+                fieldName={fieldName}
+                onClick={this.props.onClick}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+}
