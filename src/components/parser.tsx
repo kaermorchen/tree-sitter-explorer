@@ -14,7 +14,20 @@ function Parser() {
   const refs = useRef<ReactCodeMirrorRef>({});
   const [code, setCode] = useState(parser.initCode);
   const [cst, setCst] = useState<undefined | SyntaxNode>();
-  const [nodeNameIsShown, setNodeNameIsShown] = useState<boolean>(true);
+  const [nodeNameIsShown, setNodeNameIsShown] = useState<boolean>(() => {
+    const nodeNameIsShown = localStorage.getItem('nodeNameIsShown');
+
+    return nodeNameIsShown ? JSON.parse(nodeNameIsShown) : true;
+  });
+  const [terminalSymbolsIsShown, setTerminalSymbolsIsShown] = useState<boolean>(
+    () => {
+      const terminalSymbolsIsShown = localStorage.getItem(
+        'terminalSymbolsIsShown'
+      );
+
+      return terminalSymbolsIsShown ? JSON.parse(terminalSymbolsIsShown) : true;
+    }
+  );
 
   useEffect(() => {
     setCode(parser.initCode);
@@ -29,6 +42,14 @@ function Parser() {
 
     codeToCst(code);
   }, [code, parser.wasmUrl]);
+
+  useEffect(() => {
+    localStorage.setItem('nodeNameIsShown', JSON.stringify(nodeNameIsShown));
+  }, [nodeNameIsShown]);
+
+  useEffect(() => {
+    localStorage.setItem('terminalSymbolsIsShown', JSON.stringify(terminalSymbolsIsShown));
+  }, [terminalSymbolsIsShown]);
 
   function treeNodeOnClickHandler(startIndex: number, endIndex: number): void {
     refs.current?.view?.dispatch({
@@ -45,10 +66,14 @@ function Parser() {
       <div className="flex-1 p-4 overflow-auto content-container">
         <div className="mb-2">
           <InputCheckbox
-            name="show-node-name"
             label="Show node name"
             checked={nodeNameIsShown}
             onChange={setNodeNameIsShown}
+          />
+          <InputCheckbox
+            label="Show terminal symbols"
+            checked={terminalSymbolsIsShown}
+            onChange={setTerminalSymbolsIsShown}
           />
         </div>
 
@@ -57,6 +82,7 @@ function Parser() {
             node={cst}
             onClick={treeNodeOnClickHandler}
             nodeNameIsShown={nodeNameIsShown}
+            terminalSymbolsIsShown={terminalSymbolsIsShown}
           />
         ) : (
           ''

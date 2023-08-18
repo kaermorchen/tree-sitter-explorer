@@ -6,9 +6,10 @@ interface TreeViewProps {
   node: SyntaxNode;
   onClick: (startIndex: number, endIndex: number) => void;
   nodeNameIsShown: boolean;
+  terminalSymbolsIsShown: boolean;
 }
 
-function TreeView({ node, onClick, nodeNameIsShown }: TreeViewProps) {
+function TreeView({ node, onClick, nodeNameIsShown, terminalSymbolsIsShown }: TreeViewProps) {
   return (
     <code className="json-view">
       <TreeNode
@@ -16,6 +17,7 @@ function TreeView({ node, onClick, nodeNameIsShown }: TreeViewProps) {
         onClick={onClick}
         fieldName={undefined}
         nodeNameIsShown={nodeNameIsShown}
+        terminalSymbolsIsShown={terminalSymbolsIsShown}
       />
     </code>
   );
