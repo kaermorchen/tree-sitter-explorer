@@ -9,6 +9,7 @@ interface TreeNodeProps {
   node: SyntaxNode;
   fieldName: string | undefined;
   onClick: (startIndex: number, endIndex: number) => void;
+  nodeNameIsShown: boolean;
 }
 
 @observer
@@ -45,8 +46,10 @@ export default class TreeNode extends Component<TreeNodeProps> {
     return `json-view--${this.props.node.isNamed() ? 'property' : 'string'}`;
   }
 
-  get nodeNameElement(): JSX.Element | undefined {
-    if (typeof this.props.fieldName === 'string') {
+  get nodeNameElement(): JSX.Element | false | undefined {
+    if (this.props.nodeNameIsShown === false) {
+      return false;
+    } else if (typeof this.props.fieldName === 'string') {
       return <span className="json-view--index">{this.props.fieldName}: </span>;
     } else {
       return undefined;
@@ -106,6 +109,7 @@ export default class TreeNode extends Component<TreeNodeProps> {
                 key={node.id}
                 fieldName={fieldName}
                 onClick={this.props.onClick}
+                nodeNameIsShown={this.props.nodeNameIsShown}
               />
             ))}
           </div>

@@ -5,6 +5,7 @@ import { useLoaderData } from 'react-router-dom';
 import TreeView from './tree-view';
 import { SyntaxNode } from 'web-tree-sitter';
 import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import InputCheckbox from './input-checkbox';
 
 function Parser() {
   const { parser } = useLoaderData() as {
@@ -13,6 +14,7 @@ function Parser() {
   const refs = useRef<ReactCodeMirrorRef>({});
   const [code, setCode] = useState(parser.initCode);
   const [cst, setCst] = useState<undefined | SyntaxNode>();
+  const [nodeNameIsShown, setNodeNameIsShown] = useState<boolean>(true);
 
   useEffect(() => {
     setCode(parser.initCode);
@@ -35,13 +37,30 @@ function Parser() {
   }
 
   return (
-    <div className="flex-1 flex items-stretch my-4">
-      <div className="flex-1 px-4 border-r-2 overflow-auto content-container">
+    <div className="flex-1 flex items-stretch">
+      <div className="flex-1 p-4 border-r-2 overflow-auto content-container">
         <CodeMirror value={code} onChange={setCode} ref={refs} />
       </div>
 
-      <div className="flex-1 px-4 overflow-auto content-container">
-        {cst ? <TreeView node={cst} onClick={treeNodeOnClickHandler} /> : ''}
+      <div className="flex-1 p-4 overflow-auto content-container">
+        <div className="mb-2">
+          <InputCheckbox
+            name="show-node-name"
+            label="Show node name"
+            checked={nodeNameIsShown}
+            onChange={setNodeNameIsShown}
+          />
+        </div>
+
+        {cst ? (
+          <TreeView
+            node={cst}
+            onClick={treeNodeOnClickHandler}
+            nodeNameIsShown={nodeNameIsShown}
+          />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );
