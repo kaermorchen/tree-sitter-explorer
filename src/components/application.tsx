@@ -87,7 +87,8 @@ function Application() {
 
           <span
             className="ml-auto cursor-pointer"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setModalIsShown(true);
             }}
           >
