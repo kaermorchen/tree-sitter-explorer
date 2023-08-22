@@ -46,5 +46,8 @@ const router = createBrowserRouter(
 const Main = observer(() => <RouterProvider router={router} />);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <Main />
+  <>
+    <div id="modal-place" />
+    <Main />
+  </>
 );

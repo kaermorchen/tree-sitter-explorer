@@ -27,28 +27,17 @@ function Application() {
   return (
     <>
       {modalIsShown && (
-        <div className="absolute h-screen w-screen z-10 bg-gray-500 bg-opacity-75 transition-opacity ">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <Modal
-              title="About"
-              onClose={() => {
-                setModalIsShown(false);
-              }}
-            >
-              <p className="pb-4">
-                This app is a playground for tree-sitter parsers. It uses wasm
-                builds of the parsers.
-              </p>
-              <a
-                href="https://github.com/kaermorchen/tree-sitter-explorer"
-                className="inline-flex items-center"
-              >
-                <GithubIcon className="mr-1" size={20} />
-                GitHub
-              </a>
-            </Modal>
-          </div>
-        </div>
+        <Modal
+          title="About"
+          onClose={() => {
+            setModalIsShown(false);
+          }}
+        >
+          <p className="pb-4">
+            This app is a playground for tree-sitter parsers. It uses wasm
+            builds of the parsers.
+          </p>
+        </Modal>
       )}
 
       <div className="flex flex-col h-screen">
@@ -94,6 +83,14 @@ function Application() {
           >
             About
           </span>
+          <a
+            href="https://github.com/kaermorchen/tree-sitter-explorer"
+            className="ml-4 inline-flex items-center"
+            title="Tree-sitter explorer"
+          >
+            <GithubIcon className="mr-1" size={20} />
+            GitHub
+          </a>
         </header>
 
         <main className="grow flex">
