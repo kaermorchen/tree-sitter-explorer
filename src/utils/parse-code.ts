@@ -1,19 +1,14 @@
-import type Parser from 'web-tree-sitter';
+import { Parser, Language } from 'web-tree-sitter';
 
 let parser: Parser;
-// @ts-ignore
-const TreeSitter = window.TreeSitter;
 
-export async function parseCode(
-  code: string,
-  wasmUrl: string
-): Promise<Parser.Tree> {
+export async function parseCode(code: string, wasmUrl: string) {
   if (!parser) {
-    await TreeSitter.init();
-    parser = new TreeSitter();
+    await Parser.init();
+    parser = new Parser();
   }
 
-  parser.setLanguage(await TreeSitter.Language.load(wasmUrl));
+  parser.setLanguage(await Language.load(wasmUrl));
 
   return parser.parse(code);
 }

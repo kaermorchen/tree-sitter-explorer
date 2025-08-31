@@ -1,4 +1,4 @@
-import { Point, SyntaxNode } from 'web-tree-sitter';
+import { type Point, Node } from 'web-tree-sitter';
 
 interface IJsonNode {
   id: number;
@@ -13,7 +13,7 @@ interface IJsonNode {
   children: Array<IJsonNode>;
 }
 
-export function cstToJson(cst: SyntaxNode): IJsonNode {
+export function cstToJson(cst: Node): IJsonNode {
   const obj: IJsonNode = {
     id: cst.id,
     type: cst.type,
@@ -28,7 +28,9 @@ export function cstToJson(cst: SyntaxNode): IJsonNode {
   };
 
   cst.children.forEach((item) => {
-    obj.children.push(cstToJson(item));
+    if (item) {
+      obj.children.push(cstToJson(item));
+    }
   });
 
   return obj;

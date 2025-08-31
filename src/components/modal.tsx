@@ -1,10 +1,10 @@
 import CloseIcon from 'mdi-react/CloseIcon';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 interface ModalProps {
   title: string;
-  children: string | JSX.Element | JSX.Element[];
+  children: ReactNode;
   onClose: () => void;
 }
 

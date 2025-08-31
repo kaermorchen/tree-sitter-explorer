@@ -1,6 +1,7 @@
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { IParser, parsers } from '../parsers';
-import { defaultRoute, getParserById } from '..';
+import { parsers } from '../parsers';
+import type { IParser } from '../parsers';
+import { defaultRoute, getParserById } from '../main';
 import { useEffect, useState } from 'react';
 import OpenInNewIcon from 'mdi-react/OpenInNewIcon';
 import GithubIcon from 'mdi-react/GithubIcon';
