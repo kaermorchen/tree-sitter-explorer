@@ -32,7 +32,7 @@
     "build-wasm:rust": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-rust",
     "build-wasm:scala": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-scala",
     "build-wasm:typescript": "npm run build-wasm-boilerplate -- ../../node_modules/tree-sitter-typescript/typescript",
-    "build-wasm-boilerplate": "cd public/parsers && npx tree-sitter-cli@0.25.8 build-wasm",
+    "build-wasm-boilerplate": "cd public/parsers && npx tree-sitter-cli@0.25.8 build --wasm",
     "postinstall": "cp node_modules/web-tree-sitter/tree-sitter.wasm public/parsers"
   },
   "dependencies": {
