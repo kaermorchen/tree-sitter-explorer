@@ -1,15 +1,20 @@
 import 'react18-json-view/src/style.css';
-import { SyntaxNode } from 'web-tree-sitter';
+import { Node } from 'web-tree-sitter';
 import TreeNode from './tree-node';
 
 interface TreeViewProps {
-  node: SyntaxNode;
+  node: Node;
   onClick: (startIndex: number, endIndex: number) => void;
   nodeNameIsShown: boolean;
   terminalSymbolsIsShown: boolean;
 }
 
-function TreeView({ node, onClick, nodeNameIsShown, terminalSymbolsIsShown }: TreeViewProps) {
+function TreeView({
+  node,
+  onClick,
+  nodeNameIsShown,
+  terminalSymbolsIsShown,
+}: TreeViewProps) {
   return (
     <code className="json-view">
       <TreeNode

@@ -3,7 +3,7 @@ import { parseCode } from '../utils/parse-code';
 import { IParser } from '../parsers';
 import { useLoaderData } from 'react-router-dom';
 import TreeView from './tree-view';
-import { SyntaxNode } from 'web-tree-sitter';
+import { Node } from 'web-tree-sitter';
 import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import InputCheckbox from './input-checkbox';
 
@@ -13,7 +13,7 @@ function Parser() {
   };
   const refs = useRef<ReactCodeMirrorRef>({});
   const [code, setCode] = useState(parser.initCode);
-  const [cst, setCst] = useState<undefined | SyntaxNode>();
+  const [cst, setCst] = useState<undefined | Node>();
   const [nodeNameIsShown, setNodeNameIsShown] = useState<boolean>(() => {
     const nodeNameIsShown = localStorage.getItem('nodeNameIsShown');
 
@@ -37,7 +37,7 @@ function Parser() {
     async function codeToCst(code: string) {
       const cst = await parseCode(code, parser.wasmUrl);
 
-      setCst(cst.rootNode);
+      setCst(cst?.rootNode);
     }
 
     codeToCst(code);
@@ -48,7 +48,10 @@ function Parser() {
   }, [nodeNameIsShown]);
 
   useEffect(() => {
-    localStorage.setItem('terminalSymbolsIsShown', JSON.stringify(terminalSymbolsIsShown));
+    localStorage.setItem(
+      'terminalSymbolsIsShown',
+      JSON.stringify(terminalSymbolsIsShown)
+    );
   }, [terminalSymbolsIsShown]);
 
   function treeNodeOnClickHandler(startIndex: number, endIndex: number): void {
