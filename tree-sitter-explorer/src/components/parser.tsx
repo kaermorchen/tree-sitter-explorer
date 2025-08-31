@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { parseCode } from '../utils/parse-code';
-import { IParser } from '../parsers';
+import type { IParser } from '../parsers';
 import { useLoaderData } from 'react-router-dom';
 import TreeView from './tree-view';
 import { Node } from 'web-tree-sitter';
-import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
+import CodeMirror from '@uiw/react-codemirror';
+import type { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import InputCheckbox from './input-checkbox';
 
 function Parser() {

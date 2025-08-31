@@ -4,13 +4,14 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
-import './style.css';
 import Application from './components/application';
 import Parser from './components/parser';
-import { IParser, parsers } from './parsers';
+import { parsers } from './parsers';
+import type { IParser } from './parsers';
 import { observer } from 'mobx-react';
+import { StrictMode } from 'react';
 
-export const defaultRoute = 'parser/tree-sitter-javascript';
+export const defaultRoute = 'parser/tree-sitter-typescript';
 
 export function getParserById(id: string | undefined): IParser | undefined {
   return parsers.find((item) => item.id === id);
@@ -46,8 +47,8 @@ const router = createBrowserRouter(
 const Main = observer(() => <RouterProvider router={router} />);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <>
+  <StrictMode>
     <div id="modal-place" />
     <Main />
-  </>
+  </StrictMode>
 );

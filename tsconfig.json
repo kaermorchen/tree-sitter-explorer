@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2022",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
+    "types": [
+      "node"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,16 +16,17 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "useDefineForClassFields": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "verbatimModuleSyntax": true,
   },
   "include": [
-    "src"
+    "./src"
   ]
 }

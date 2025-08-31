@@ -1,9 +1,8 @@
-import 'react18-json-view/src/style.css';
 import { Node } from 'web-tree-sitter';
 import ConsoleLineIcon from 'mdi-react/ConsoleLineIcon';
 import { action, makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
-import { Component } from 'react';
+import { Component, type ReactNode } from 'react';
 
 interface TreeNodeProps {
   node: Node;
@@ -15,8 +14,7 @@ interface TreeNodeProps {
 
 @observer
 export default class TreeNode extends Component<TreeNodeProps> {
-  @observable
-  childrenIsShown = true;
+  @observable accessor childrenIsShown = true;
 
   constructor(props: TreeNodeProps) {
     super(props);
@@ -47,7 +45,7 @@ export default class TreeNode extends Component<TreeNodeProps> {
     return `json-view--${this.props.node.isNamed ? 'property' : 'string'}`;
   }
 
-  get nodeNameElement(): JSX.Element | null {
+  get nodeNameElement(): ReactNode {
     if (this.props.nodeNameIsShown === false) {
       return null;
     } else if (typeof this.props.fieldName === 'string') {

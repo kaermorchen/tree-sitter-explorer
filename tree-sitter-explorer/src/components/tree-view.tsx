@@ -1,4 +1,3 @@
-import 'react18-json-view/src/style.css';
 import { Node } from 'web-tree-sitter';
 import TreeNode from './tree-node';
 

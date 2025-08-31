@@ -1,4 +1,4 @@
-import { Point, Node } from 'web-tree-sitter';
+import { type Point, Node } from 'web-tree-sitter';
 
 interface IJsonNode {
   id: number;
